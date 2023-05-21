@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="./main.js" type="module"></script>
@@ -64,67 +66,30 @@
                     <td>19.16</td>
                     <td>19.16</td>
                 </tr>
-                <tr class="table-info">
+                <tr>
                     <th scope="row">Total</th>
                     <th>4950</th>
                     <th>$597,128.00</th>
                     <th>$120.63</th>
                     <th>100%</th>
+                    <th>20</th>
+                    <th>20</th>
                 </tr>
             </tbody>
         </table>
-
-        <script>
-            // Obtener todas las filas de la tabla
-            var tableRows = document.querySelectorAll("#myTable tbody tr");
-
-            // Inicializar las variables para almacenar los totales
-            var totalUnidades = 0;
-            var totalPesos = 0;
-            var totalMezcla = 0;
-            var totalPorcentaje = 0;
-            var totalInterior = 0;
-            var totalExterior = 0;
-
-            // Calcular los totales
-            for (var i = 0; i < tableRows.length - 1; i++) {
-                var row = tableRows[i];
-
-                // Obtener los valores de cada celda
-                var unidades = parseInt(row.cells[1].textContent);
-                var pesos = parseFloat(row.cells[2].textContent.replace(/[^0-9.-]+/g, ""));
-                var mezcla = parseFloat(row.cells[3].textContent.replace(/[^0-9.-]+/g, ""));
-                var porcentaje = parseFloat(row.cells[4].textContent);
-                var interior = parseFloat(row.cells[5].textContent);
-                var exterior = parseFloat(row.cells[6].textContent);
-
-                // Sumar los valores a los totales
-                totalUnidades += unidades;
-                totalPesos += pesos;
-                totalMezcla += mezcla / 3;
-                totalPorcentaje += porcentaje;
-                totalInterior += interior;
-                totalExterior += exterior;
-            }
-
-            // Actualizar los resultados en la fila del "Total"
-            var totalRow = tableRows[tableRows.length - 1];
-            totalRow.cells[1].textContent = totalUnidades;
-            totalRow.cells[2].textContent = "$" + totalPesos.toFixed(2);
-            totalRow.cells[3].textContent = "$" + totalMezcla.toFixed(2);
-            totalRow.cells[4].textContent = totalPorcentaje.toFixed(2) + "%";
-            totalRow.cells[5].textContent = totalInterior.toFixed(2);
-            totalRow.cells[6].textContent = totalExterior.toFixed(2);
-
-        </script>
+        <button id="editButton">Editar</button>
+        <button id="saveButton" disabled>Guardar</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1/firebase.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 
 </html>
