@@ -24,42 +24,99 @@
     </div>
 
     <div class="container py-5">
-        <table class="table">
+        <table class="table" id="myTable">
             <thead>
                 <tr>
+                    <th scope="col">Turno</th>
                     <th scope="col">Unidades</th>
-                    <th scope="col">Mezcla Precios</th>
-                    <th scope="col">Productividad</th>
+                    <th scope="col">Pesos</th>
+                    <th scope="col">Mezcla</th>
+                    <th scope="col">%</th>
+                    <th scope="col">Productividad<br class="text-wrap">Interior</th>
+                    <th scope="col">Productividad<br class="text-wrap">Exterior</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>119</td>
-                    <td>Interior / Exterior</td>
-
+                    <th scope="row">Turno 1</th>
+                    <td>2051</td>
+                    <td>$252,940.00</td>
+                    <td>$123.33</td>
+                    <td>41.43%</td>
+                    <td>15.42</td>
+                    <td>17.99</td>
                 </tr>
                 <tr>
-                    <th scope="row">2</th>
-                    <td>117</td>
-                    <td>__________________</td>
+                    <th scope="row">Turno 2</th>
+                    <td>2171</td>
+                    <td>$258,428.00</td>
+                    <td>$119.04</td>
+                    <td>43.86%</td>
+                    <td>16.32</td>
+                    <td>19.04</td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">120</td>
+                    <th scope="row">Turno 3</th>
+                    <td>728</td>
+                    <td>$85,760.00</td>
+                    <td>$117.80</td>
+                    <td>14.71%</td>
+                    <td>19.16</td>
+                    <td>19.16</td>
                 </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td colspan="2">154</td>
+                <tr class="table-info">
+                    <th scope="row">Total</th>
+                    <th>4950</th>
+                    <th>$597,128.00</th>
+                    <th>$120.63</th>
+                    <th>100%</th>
                 </tr>
-            </tbody>
-            <tr>
-                <th scope="row">Total</th>
-                <td colspan="2">510</td>
-            </tr>
-            </tbody>
             </tbody>
         </table>
+
+        <script>
+            // Obtener todas las filas de la tabla
+            var tableRows = document.querySelectorAll("#myTable tbody tr");
+
+            // Inicializar las variables para almacenar los totales
+            var totalUnidades = 0;
+            var totalPesos = 0;
+            var totalMezcla = 0;
+            var totalPorcentaje = 0;
+            var totalInterior = 0;
+            var totalExterior = 0;
+
+            // Calcular los totales
+            for (var i = 0; i < tableRows.length - 1; i++) {
+                var row = tableRows[i];
+
+                // Obtener los valores de cada celda
+                var unidades = parseInt(row.cells[1].textContent);
+                var pesos = parseFloat(row.cells[2].textContent.replace(/[^0-9.-]+/g, ""));
+                var mezcla = parseFloat(row.cells[3].textContent.replace(/[^0-9.-]+/g, ""));
+                var porcentaje = parseFloat(row.cells[4].textContent);
+                var interior = parseFloat(row.cells[5].textContent);
+                var exterior = parseFloat(row.cells[6].textContent);
+
+                // Sumar los valores a los totales
+                totalUnidades += unidades;
+                totalPesos += pesos;
+                totalMezcla += mezcla / 3;
+                totalPorcentaje += porcentaje;
+                totalInterior += interior;
+                totalExterior += exterior;
+            }
+
+            // Actualizar los resultados en la fila del "Total"
+            var totalRow = tableRows[tableRows.length - 1];
+            totalRow.cells[1].textContent = totalUnidades;
+            totalRow.cells[2].textContent = "$" + totalPesos.toFixed(2);
+            totalRow.cells[3].textContent = "$" + totalMezcla.toFixed(2);
+            totalRow.cells[4].textContent = totalPorcentaje.toFixed(2) + "%";
+            totalRow.cells[5].textContent = totalInterior.toFixed(2);
+            totalRow.cells[6].textContent = totalExterior.toFixed(2);
+
+        </script>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
