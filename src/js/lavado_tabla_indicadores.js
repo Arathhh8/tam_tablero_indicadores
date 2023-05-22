@@ -59,9 +59,21 @@ function disableCellEditing(table, rowIndexes) {
       
       // Reemplazar el elemento <input> con el valor ingresado
       cell.innerHTML = value;
+      
+      // Obtener el ID del registro desde el atributo "data-id"
+      const id = row.getAttribute('data-id');
+      
+      // Actualizar el valor en la base de datos
+      const updates = {};
+      updates['datos/' + id + '/' + cell.getAttribute('data-field')] = value;
+      database.ref().update(updates);
     }
   }
+  
+  // Calcular los valores de la fila "Total"
+  calculateTotal(table);
 }
+
 
 // Función para calcular los valores de la fila "Total" en la tabla
 function calculateTotal(table) {
